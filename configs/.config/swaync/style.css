@@ -1,0 +1,164 @@
+/* ================================
+   Wallust → SwayNC Theme Template
+   ================================ */
+
+/* Wallust color variables */
+@define-color bg        #030004;
+@define-color fg        #E9E9E1;
+@define-color accent    #917971;
+@define-color accent2   #F89840;
+@define-color critical  #3F3242;
+@define-color warning   #375D57;
+@define-color success   #A31522;
+@define-color muted     #97978E;
+
+/* Fonts */
+* {
+  font-family: "JetBrains Mono", "Inter", "Cantarell", sans-serif;
+  font-size: 13px;
+}
+
+/* ====================
+   Notification Window
+   ==================== */
+
+.notification {
+  background: @bg;
+  color: @fg;
+  border-radius: 2px;
+  padding: 12px;
+  margin: 8px;
+  border: 1px solid alpha(@accent, 0.25);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+/* Urgency levels */
+.notification.low {
+  border-left: 4px solid @muted;
+}
+
+.notification.normal {
+  border-left: 4px solid @accent;
+}
+
+.notification.critical {
+  border-left: 4px solid @critical;
+  background: shade(@bg, 0.92);
+}
+
+/* ====================
+   Notification Content
+   ==================== */
+
+.summary {
+  font-weight: 600;
+  color: @fg;
+}
+
+.body {
+  color: alpha(@fg, 0.85);
+  margin-top: 4px;
+}
+
+.time {
+  color: alpha(@fg, 0.5);
+  font-size: 11px;
+}
+
+/* ====================
+   App Icon
+   ==================== */
+
+.image {
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+/* ====================
+   Action Buttons
+   ==================== */
+
+.actions {
+  margin-top: 10px;
+}
+
+.action-button {
+  background: alpha(@accent, 0.15);
+  color: @fg;
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin-right: 6px;
+  border: 1px solid alpha(@accent, 0.35);
+}
+
+.action-button:hover {
+  background: alpha(@accent, 0.3);
+}
+
+/* ====================
+   Control Center
+   ==================== */
+
+.control-center {
+  background: @bg;
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid alpha(@accent2, 0.3);
+}
+
+/* Control Center widgets */
+.widget {
+  background: shade(@bg, 0.95);
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid alpha(@accent, 0.2);
+}
+
+.widget-title {
+  font-weight: 600;
+  color: @accent;
+}
+
+/* ====================
+   Sliders (Volume / Brightness)
+   ==================== */
+
+scale trough {
+  background: alpha(@muted, 0.25);
+  border-radius: 10px;
+  min-height: 6px;
+}
+
+scale highlight {
+  background: @accent;
+  border-radius: 10px;
+}
+
+/* ====================
+   DND Toggle
+   ==================== */
+
+.dnd {
+  background: alpha(@accent2, 0.15);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.dnd.active {
+  background: alpha(@critical, 0.2);
+}
+
+/* ====================
+   Scrollbar (subtle)
+   ==================== */
+
+scrollbar {
+  background: transparent;
+}
+
+scrollbar slider {
+  background: alpha(@accent, 0.25);
+  border-radius: 10px;
+}
+

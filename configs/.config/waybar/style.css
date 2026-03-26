@@ -1,0 +1,63 @@
+@import "colors.css";
+
+* {
+    font-family: "JetBrainsMono Nerd Font Propo", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 1px;
+    padding: 0px;
+    margin: 0;
+}
+
+window#waybar {
+    /* GTK CSS alpha() handles the transparency natively */
+    background-color: alpha(@background, 0.9);
+    border-bottom: 1px solid alpha(@color8, 0.3);
+}
+
+#workspaces button {
+    all: initial;
+    padding: 0 6px;
+    margin: 0 1.5px;
+    min-width: 9px;
+    color: @foreground;
+}
+
+#workspaces button.active {
+    color: @color4;
+    border-bottom: 2px solid @color4;
+}
+
+#workspaces button.empty {
+    color: @color8;
+    opacity: 0.5;
+}
+
+/* --- Global Module Styling --- */
+#memory, #cpu, #battery, #clock, #pulseaudio, #custom-brightness,
+#bluetooth, #network, #mpris, #tray, #disk, #custom-expand-icon {
+    background-color: transparent;
+    padding: 5px 8px;
+    color: @foreground;
+    margin: 2.5px;
+    border-radius: 1px;
+    min-width: 18px;
+    min-height: 24px;
+}
+
+#battery.good {
+    color: @color2; 
+}
+
+#battery.warning {
+    color: @color3; 
+}
+
+#battery.critical {
+    color: @color1;
+}
+
+#tray menu {
+    background-color: @background;
+    color: @foreground;
+}

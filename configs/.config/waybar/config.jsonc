@@ -1,0 +1,94 @@
+{
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+  "height": 26,
+  "on-sigusr1": "hide",
+  "on-sigusr2": "show",
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "bluetooth",
+    "network",
+    "pulseaudio",
+    "battery"
+  ],
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "active": "󱓻"
+    },
+    "persistent-workspaces": {
+      "1": [], "2": [], "3": [], "4": [], "5": []
+    }
+  },
+  "clock": {
+    "format": "{:L%A %H:%M}",
+    "format-alt": "{:L%d %B W%V %Y}",
+    "tooltip": false,
+    "on-click-right": "kitty --class floating -e tzselect"
+  },
+  "custom/caffeine": {
+    "exec": "~/.config/hypr/scripts/caffeine.sh waybar",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 5,
+    "on-click": "~/.config/hypr/scripts/caffeine.sh toggle",
+    "tooltip": true
+  },
+
+   "network": {
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format": "{icon}",           
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰀂",
+    "format-disconnected": "󰖪",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 4,
+    "nospacing": 1,
+    "on-click": "kitty -e nmtui"
+  },
+
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-discharging": "{icon}",
+    "format-charging": "{icon}",
+    "format-plugged": "",
+    "format-icons": {
+      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "format-full": "󰂅",
+    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
+    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+    "interval": 5,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "on-click": "~/.config/hypr/scripts/power_manage.sh toggle",
+    "on-update": "~/.config/hypr/scripts/power_manage.sh check"
+  },
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "on-click": "kitty -e bluetui"
+  },
+  "pulseaudio": {
+    "format": "{icon}",
+    "on-click": "kitty -e pulsemixer",
+    "on-click-right": "pamixer -t",
+    "tooltip-format": "Playing at {volume}%",
+    "scroll-step": 5,
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", ""]
+    }
+  }
+}

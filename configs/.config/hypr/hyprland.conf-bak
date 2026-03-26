@@ -1,0 +1,157 @@
+monitor=,preferred,auto,1
+
+exec-once = hyprpaper &
+exec-once = dunst &
+exec-once = nm-applet &
+exec-once = systemctl --user start hyprpolkitagent
+exec-once = waybar &
+
+input {
+  kb_layout = us
+  follow_mouse = 0
+  touchpad {
+    natural_scroll = yes
+  }
+}
+
+general {
+  gaps_in = 4
+  gaps_out = 8
+  border_size = 1
+  layout = dwindle
+  resize_on_border = true
+  allow_tearing = false
+}
+
+dwindle {
+  pseudotile = yes
+  preserve_split = yes
+}
+
+decoration {
+  active_opacity = 0.95
+  inactive_opacity = 0.85
+  fullscreen_opacity = 1.0
+
+  blur {
+    enabled = true
+    size = 8
+    passes = 2
+    ignore_opacity = true
+    new_optimizations = true
+    xray = false
+    noise = 0.0117
+    contrast = 0.8916
+    brightness = 0.8172
+    vibrancy = 0.1696
+    vibrancy_darkness = 0.0
+    special = false
+    popups = true
+    popups_ignorealpha = 0.6
+  }
+}
+
+windowrule = opacity 0.8 0.7, class:^(kitty)$
+
+animations {
+  enabled = yes
+  bezier = easeinoutsine, 0.5, 0, 0.5, 1
+  animation = windows, 1, 5, easeinoutsine
+  animation = fade, 1, 10, default
+  animation = border, 1, 10, default
+  animation = workspaces, 1, 6, default
+}
+
+windowrulev2 = noanim, class:^(rofi)$
+windowrulev2 = noanim, class:^(rofi)$
+windowrulev2 = stayfocused, class:^(Rofi)$
+windowrulev2 = float, class:^(Rofi)$ 
+
+$mod = SUPER
+
+bind = $mod, RETURN, exec, kitty
+bind = $mod, D, exec, rofi -show drun
+bind = $mod, F, fullscreen
+bind = $mod, E, exec, nautilus
+bind = $mod, Q, killactive
+bind = $mod, B, exec, firefox
+bind = $mod, L, exec, hyprlock
+bind = $mod, W, exec, ~/.config/rofi/wallpapers.sh
+
+bind = $mod SHIFT, B, exec, ~/.config/rofi/batterymode.sh
+bind = $mod SHIFT, M, exec, ~/.config/rofi/networkmenu.sh
+
+bind = , XF86AudioPlay, exec, playerctl play-pause
+bind = , XF86AudioNext, exec, playerctl next
+bind = , XF86AudioPrev, exec, playerctl previous
+bind = , XF86AudioStop, exec, playerctl stop
+
+bind = , Print, exec, grim -g "$(slurp)" - | swappy -f -
+bind = $mod SHIFT, P, exec, ~/.config/scripts/screenrecorder.sh
+
+bind = , XF86AudioRaiseVolume, exec, pamixer -i 5
+bind = , XF86AudioLowerVolume, exec, pamixer -d 5
+bind = , XF86AudioMute, exec, pamixer -t
+bind = , XF86MonBrightnessUp, exec, bash -c 'brightnessctl set +10% && pkill -RTMIN+6 waybar'
+bind = , XF86MonBrightnessDown, exec, bash -c 'brightnessctl set 10%- && pkill -RTMIN+6 waybar'
+
+bindm = $mod, mouse:272, movewindow
+bindm = $mod, mouse:273, resizewindow
+
+bind = $mod, 1, workspace, 1
+bind = $mod, 2, workspace, 2
+bind = $mod, 3, workspace, 3
+bind = $mod, 4, workspace, 4
+bind = $mod, 5, workspace, 5
+bind = $mod, 6, workspace, 6
+bind = $mod, 7, workspace, 7
+bind = $mod, 8, workspace, 8
+bind = $mod, 9, workspace, 9
+bind = $mod, 0, workspace, 10
+
+bind = $mod, J, togglesplit
+bind = $mod, P, pseudo
+bind = $mod, V, togglefloating
+
+bind = $mod, left, movefocus, l
+bind = $mod, right, movefocus, r
+bind = $mod, up, movefocus, u
+bind = $mod, down, movefocus, d
+
+bind = $mod, code:10, workspace, 1
+bind = $mod, code:11, workspace, 2
+bind = $mod, code:12, workspace, 3
+bind = $mod, code:13, workspace, 4
+bind = $mod, code:14, workspace, 5
+bind = $mod, code:15, workspace, 6
+bind = $mod, code:16, workspace, 7
+bind = $mod, code:17, workspace, 8
+bind = $mod, code:18, workspace, 9
+bind = $mod, code:19, workspace, 10
+
+bind = $mod SHIFT, code:10, movetoworkspace, 1
+bind = $mod SHIFT, code:11, movetoworkspace, 2
+bind = $mod SHIFT, code:12, movetoworkspace, 3
+bind = $mod SHIFT, code:13, movetoworkspace, 4
+bind = $mod SHIFT, code:14, movetoworkspace, 5
+bind = $mod SHIFT, code:15, movetoworkspace, 6
+bind = $mod SHIFT, code:16, movetoworkspace, 7
+bind = $mod SHIFT, code:17, movetoworkspace, 8
+bind = $mod SHIFT, code:18, movetoworkspace, 9
+bind = $mod SHIFT, code:19, movetoworkspace, 10
+
+bind = $mod SHIFT, left, swapwindow, l
+bind = $mod SHIFT, right, swapwindow, r
+bind = $mod SHIFT, up, swapwindow, u
+bind = $mod SHIFT, down, swapwindow, d
+
+bind = $mod, minus, resizeactive, -100 0
+bind = $mod, equal, resizeactive, 100 0
+bind = $mod SHIFT, minus, resizeactive, 0 -100
+bind = $mod SHIFT, equal, resizeactive, 0 100
+
+bind = $mod, mouse_down, workspace, e+1
+bind = $mod, mouse_up, workspace, e-1
+
+bindm = $mod, mouse:272, movewindow
+bindm = $mod, mouse:273, resizewindow

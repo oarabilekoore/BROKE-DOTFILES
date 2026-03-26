@@ -1,0 +1,4 @@
+hyprshade
+vicinae-bin
+wallust
+wps-office-cn
