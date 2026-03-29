@@ -29,15 +29,12 @@ CONFIGS=(
   ".bashrc"
 )
 
-rm -rf "$BACKUP_DIR"
 mkdir -p "$BACKUP_DIR"
 
-cd "$HOME" || exit 1
-
 for item in "${CONFIGS[@]}"; do
-  if [[ -e "$item" ]]; then
-    # --parents maintains the directory structure (e.g., creates .config/hypr)
-    cp -r --parents "$item" "$BACKUP_DIR/"
+  if [[ -e "$HOME/$item" ]]; then
+    mkdir -p "$BACKUP_DIR/$(dirname "$item")"
+    rsync -a --delete "$HOME/$item" "$BACKUP_DIR/$(dirname "$item")/"
     echo "Backed up: $item"
   else
     echo "[WARNING] Skipped: $item (not found)" >&2

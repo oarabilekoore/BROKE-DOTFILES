@@ -19,12 +19,10 @@ fi
 # 2. Bootstrap yay if missing
 if ! command -v yay >/dev/null 2>&1; then
   info "yay not found. Installing yay..."
-  sudo pacman -S --needed base-devel git
+  sudo pacman -S --needed --noconfirm base-devel git
   git clone https://aur.archlinux.org/yay.git /tmp/yay-install
-  cd /tmp/yay-install
-  makepkg -si --noconfirm
+  (cd /tmp/yay-install && makepkg -si --noconfirm)
   rm -rf /tmp/yay-install
-  cd "$SCRIPT_DIR"
 fi
 
 # 3. Install AUR packages
