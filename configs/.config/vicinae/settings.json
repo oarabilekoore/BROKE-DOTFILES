@@ -62,6 +62,20 @@
                "/usr/local/share/applications",
                "/usr/share/applications"
             ]
+         },
+         "entrypoints": {
+            "wps-office-et": {
+               "enabled": false
+            },
+            "wps-office-pdf": {
+               "enabled": false
+            },
+            "wps-office-wpp": {
+               "enabled": false
+            },
+            "wps-office-wps": {
+               "enabled": false
+            }
          }
       },
       "clipboard": {

@@ -1,5 +1,4 @@
 accountsservice
-alacritty
 alsa-firmware
 alsa-plugins
 alsa-utils
@@ -54,6 +53,7 @@ exfatprogs
 f2fs-tools
 fastfetch
 ffmpegthumbnailer
+firefox
 fsarchiver
 git
 github-cli
@@ -68,6 +68,7 @@ hdparm
 hwdetect
 hwinfo
 hyprland
+hyprlock
 inetutils
 inotify-tools
 intel-media-driver
@@ -78,6 +79,7 @@ iwd
 jfsutils
 kdenlive
 keyd
+kicad
 kitty
 less
 lf
@@ -111,7 +113,7 @@ modemmanager
 mtools
 nano
 nano-syntax-highlighting
-nemo
+nautilus
 neovim
 netctl
 networkmanager
@@ -122,6 +124,7 @@ noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 nss-mdns
+nwg-look
 obs-studio
 octave
 octopi
@@ -129,6 +132,7 @@ opencl-mesa
 openssh
 os-prober
 pacman-contrib
+papers
 papirus-icon-theme
 paru
 pavucontrol
@@ -155,6 +159,7 @@ ripgrep
 rofi
 rsync
 s-nail
+sassc
 scrcpy
 sddm
 sg3_utils
@@ -204,4 +209,3 @@ xl2tpd
 xorg-xwayland
 yay
 zed
-zen-browser-bin
