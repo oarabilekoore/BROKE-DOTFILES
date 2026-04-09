@@ -10,9 +10,7 @@
 }
 
 window#waybar {
-    /* GTK CSS alpha() handles the transparency natively */
     background-color: alpha(@background, 0.9);
-    border-bottom: 1px solid alpha(@color8, 0.3);
 }
 
 #workspaces button {
@@ -25,7 +23,6 @@ window#waybar {
 
 #workspaces button.active {
     color: @color4;
-    border-bottom: 2px solid @color4;
 }
 
 #workspaces button.empty {
@@ -34,30 +31,64 @@ window#waybar {
 }
 
 /* --- Global Module Styling --- */
-#memory, #cpu, #battery, #clock, #pulseaudio, #custom-brightness,
-#bluetooth, #network, #mpris, #tray, #disk, #custom-expand-icon {
-    background-color: transparent;
-    padding: 5px 8px;
-    color: @foreground;
-    margin: 2.5px;
-    border-radius: 1px;
-    min-width: 18px;
-    min-height: 24px;
+#memory, #cpu, #battery, #clock, #pulseaudio, #custom-brightness, 
+#bluetooth, #network, #mpris, #tray, #disk, #custom-expand-icon,  
+#custom-caffeine, #custom-media {
+  background-color: transparent;                                 
+  padding: 5px 8px;                                              
+    margin: 2.5px;                                                 
+    border-radius: 1px;                                            
+    min-width: 18px;                                               
+    min-height: 24px;                                              
 }
 
+/* --- Active State Colors --- */
+#custom-caffeine.active,
+#bluetooth.connected,
+#custom-media.active,
+#bluetooth.on,
+#network.wifi,
+#network.ethernet,
+#network.linked,
+#pulseaudio:not(.muted),
+#battery,
 #battery.good {
-    color: @color2; 
+    color: @foreground;
 }
 
-#battery.warning {
-    color: @color3; 
+/* --- Inactive State Colors --- */
+#custom-caffeine.inactive,
+#bluetooth.disabled,
+#bluetooth.off,
+#network.disconnected,
+#network.disabled,
+#custom-media.inactive,
+#pulseaudio.muted {
+    color: @color8;
 }
+
+/* --- Battery Specific Overrides --- */
+#battery.warning {
+    color: @color3;}
 
 #battery.critical {
-    color: @color1;
+    color: transparent;
 }
-
 #tray menu {
     background-color: @background;
     color: @foreground;
+}
+
+#tray {
+    /* These match your other modules */
+    padding: 5px 8px;
+    margin: 2.5px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
 }

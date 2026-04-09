@@ -6,10 +6,12 @@
   "height": 26,
   "on-sigusr1": "hide",
   "on-sigusr2": "show",
-  "modules-left": ["hyprland/workspaces"],
+  "modules-left": ["hyprland/workspaces", "custom/media"],
   "modules-center": ["clock"],
   "modules-right": [
+    "tray",
     "bluetooth",
+    "custom/caffeine",
     "network",
     "pulseaudio",
     "battery"
@@ -25,6 +27,18 @@
       "1": [], "2": [], "3": [], "4": [], "5": []
     }
   },
+
+  "custom/media": {
+    "format": "{}",
+    "return-type": "json",
+    "max-length": 55,
+    "exec": "~/.config/hypr/scripts/now_playing.sh",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "interval": 1
+},
+  
   "clock": {
     "format": "{:L%A %H:%M}",
     "format-alt": "{:L%d %B W%V %Y}",
@@ -55,7 +69,7 @@
   },
 
   "battery": {
-    "format": "{capacity}% {icon}",
+    "format": "{icon}",
     "format-discharging": "{icon}",
     "format-charging": "{icon}",
     "format-plugged": "",
@@ -66,10 +80,10 @@
     "format-full": "󰂅",
     "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
     "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
-    "interval": 5,
+    "interval": 30,
     "states": {
-      "warning": 20,
-      "critical": 10
+      "warning": 40,
+      "critical": 30
     },
     "on-click": "~/.config/hypr/scripts/power_manage.sh toggle",
     "on-update": "~/.config/hypr/scripts/power_manage.sh check"
@@ -90,5 +104,9 @@
     "format-icons": {
       "default": ["", "", ""]
     }
+  },
+  "tray": {
+    "icon-size": 16, 
+    "spacing": 24
   }
 }

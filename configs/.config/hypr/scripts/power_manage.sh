@@ -1,61 +1,75 @@
-#!/bin/bash
-#!/bin/bash
-#!/bin/bash
+#!/usr/bin/env bash
 
-STATE_FILE="/tmp/cpu_power_mode"
-# This file tracks if the user manually picked a mode to stop the auto-switch from fighting you
-OVERRIDE_FILE="/tmp/cpu_power_override"
+# Frequencies in kHz
+MAX_FREQ=2800000
+LOW_FREQ=1900000
+MIN_FREQ=800000 # 800 MHz Extreme Mode
 
-# Get current status
-CAPACITY=$(cat /sys/class/power_supply/BAT0/capacity)
-STATUS=$(cat /sys/class/power_supply/BAT0/status)
+# Thresholds
+LOW_THRESHOLD=70
+CRITICAL_THRESHOLD=50 # Now triggers at 30%
 
-# Function to apply settings
-apply_mode() {
-  local mode=$1
-  local notify_type=$2
-  local msg=$3
+STATE_FILE="/tmp/power_mode_state"
+OVERRIDE_FILE="/tmp/power_mode_override"
 
-  sudo cpupower frequency-set -g "$mode" >/dev/null
-  echo "$mode" >"$STATE_FILE"
-  notify-send -u "$notify_type" -i "speedometer" "Power Management" "$msg"
-}
+get_battery() { cat /sys/class/power_supply/BAT0/capacity; }
+get_status() { cat /sys/class/power_supply/BAT0/status; }
 
-toggle_power() {
-  CURRENT_MODE=$(cat "$STATE_FILE" 2>/dev/null || echo "powersave")
+apply_freq() {
+  local freq=$1
+  local mode_name=$2
+  local prev_mode=$(cat "$STATE_FILE" 2>/dev/null)
 
-  if [ "$CURRENT_MODE" = "powersave" ]; then
-    # User explicitly wants performance
-    touch "$OVERRIDE_FILE"
-    apply_mode "performance" "normal" "Manual Override: PERFORMANCE enabled"
-  else
-    # User explicitly wants powersave
-    rm -f "$OVERRIDE_FILE"
-    apply_mode "powersave" "normal" "Manual Override: POWERSAVE enabled"
+  # Only apply and notify if the state actually changes
+  if [[ "$mode_name" != "$prev_mode" ]]; then
+    for file in /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq; do
+      echo "$freq" >"$file" 2>/dev/null
+    done
+    echo "$mode_name" >"$STATE_FILE"
+    notify-send -u normal -i "speedometer" "Power Management" "CPU Mode: ${mode_name}"
   fi
 }
 
 check_battery() {
-  # If we are plugged in, clear overrides and allow performance
-  if [ "$STATUS" = "Charging" ] || [ "$STATUS" = "Full" ]; then
+  local status=$(get_status)
+  local capacity=$(get_battery)
+
+  # 1. Charger Logic: Resets everything to Max Performance
+  if [[ "$status" == "Charging" || "$status" == "Full" ]]; then
     rm -f "$OVERRIDE_FILE"
+    apply_freq "$MAX_FREQ" "PERFORMANCE (AC)"
     return
   fi
 
-  # AUTO-SWITCH LOGIC
-  # Only auto-switch to powersave if:
-  # 1. Battery < 30%
-  # 2. We haven't already auto-switched (checked via STATE_FILE)
-  # 3. There is no MANUAL OVERRIDE file present
-  if [ "$CAPACITY" -le 30 ] && [ ! -f "$OVERRIDE_FILE" ]; then
-    CURRENT_MODE=$(cat "$STATE_FILE" 2>/dev/null)
-    if [ "$CURRENT_MODE" != "powersave" ]; then
-      apply_mode "powersave" "critical" "Low Battery ($CAPACITY%): Auto-switching to POWERSAVE"
-    fi
+  # 2. Manual Override Logic: Respect user's toggle until plugged back in
+  if [[ -f "$OVERRIDE_FILE" ]]; then
+    return
+  fi
+
+  # 3. 3-Tier Auto Logic
+  if [[ "$capacity" -le $CRITICAL_THRESHOLD ]]; then
+    apply_freq "$MIN_FREQ" "EXTREME POWERSAVE (Critical)"
+  elif [[ "$capacity" -le $LOW_THRESHOLD ]]; then
+    apply_freq "$LOW_FREQ" "POWERSAVE (Low)"
+  else
+    apply_freq "$MAX_FREQ" "PERFORMANCE (High)"
+  fi
+}
+
+toggle_mode() {
+  local current=$(cat "$STATE_FILE" 2>/dev/null)
+
+  # Toggle manually swaps between Performance and the standard Low mode
+  if [[ "$current" == "PERFORMANCE (High)" || "$current" == "MANUAL PERFORMANCE" || "$current" == "PERFORMANCE (AC)" ]]; then
+    touch "$OVERRIDE_FILE"
+    apply_freq "$LOW_FREQ" "MANUAL POWERSAVE"
+  else
+    touch "$OVERRIDE_FILE"
+    apply_freq "$MAX_FREQ" "MANUAL PERFORMANCE"
   fi
 }
 
 case "$1" in
-toggle) toggle_power ;;
-check) check_battery ;;
+"check") check_battery ;;
+"toggle") toggle_mode ;;
 esac

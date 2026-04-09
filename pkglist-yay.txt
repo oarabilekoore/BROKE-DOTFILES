@@ -1,3 +1,6 @@
+bottles
+discord_arch_electron
+hyprfloat
 hyprshade
 vicinae-bin
 wallust
