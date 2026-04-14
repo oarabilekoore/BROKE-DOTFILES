@@ -1,4 +1,7 @@
+
 # B.R.O.K.E DOTFILES (Basic Ricing On Krappy Equipment)
+
+![B.R.O.K.E Desktop](./screenshots/1.png)
 
 **B**asic **R**icing **O**n **K**rappy **E**quipment
 
@@ -48,6 +51,43 @@ This process will:
 4.  Copy configurations from the `configs/` directory into your `$HOME` directory.
 5.  Execute `.patches.sh` to fix environment inconsistencies.
 
+## Keybindings & Shortcuts
+
+The environment is built around **Hyprland**, utilizing the `SUPER` key as the main modifier.
+
+### Applications & Utilities
+* `SUPER` + `RETURN` or `X` : Open Terminal (Kitty)
+* `SUPER` + `B` : Web Browser (Firefox)
+* `SUPER` + `E` : File Manager (Nautilus)
+* `SUPER` + `D` : App Launcher (Vicinae)
+* `SUPER` + `W` : Wallpaper Picker (Waypaper)
+* `SUPER` + `;` : Clipboard History
+* `Print Screen`: Take a screenshot (Peck)
+
+### Custom Scripts & System Controls
+* `SUPER` + `L` : Lock Screen (Hyprlock)
+* `SUPER` + `S` : Shader Picker (Apply visual screen shaders)
+* `SUPER` + `SHIFT` + `B` : Toggle Waybar (Auto-hide vs Locked open)
+* `SUPER` + `SHIFT` + `C` : Toggle Caffeine (Prevent sleep/idle)
+* `SUPER` + `SHIFT` + `P` : Connect Android Phone (scrcpy modes)
+
+### Window Management
+* `SUPER` + `Q` : Close Active Window
+* `SUPER` + `F` : Toggle Fullscreen
+* `SUPER` + `V` : Toggle Floating & Center Window
+* `SUPER` + `J` : Toggle Split
+* `SUPER` + `P` : Pin Window
+* `SUPER` + `Tab` : Cycle Windows (Bring to top)
+
+### Navigation & Layout
+* `SUPER` + `[1-0]` : Switch to Workspace 1-10
+* `SUPER` + `SHIFT` + `[1-0]` : Move Window to Workspace 1-10
+* `SUPER` + `Left/Right/Up/Down` : Move Focus
+* `SUPER` + `SHIFT` + `Left/Right/Up/Down` : Swap Window Position
+* `SUPER` + `- / =` : Shrink / Grow Window Size
+* `SUPER` + `SHIFT` + `- / =` : Resize Width Only
+* `SUPER` + `CTRL` + `- / =` : Resize Height Only
+
 ## Modifying the Backup List
 
 To add new configurations to the backup routine, open `mitosis.sh` and add the relative path (starting from `$HOME`) to the `CONFIGS` array.
@@ -65,4 +105,4 @@ CONFIGS=(
 # LICENSE 
 
 MIT.
-
+```
