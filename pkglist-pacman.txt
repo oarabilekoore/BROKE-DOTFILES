@@ -17,7 +17,6 @@ bluez-hid2hci
 bluez-libs
 bluez-obex
 bluez-utils
-brave-bin
 brightnessctl
 btop
 btrfs-assistant
@@ -46,9 +45,11 @@ cryptsetup
 device-mapper
 dialog
 diffutils
+discord
 dmidecode
 dmraid
 dnsmasq
+docker
 dosfstools
 duf
 e2fsprogs
@@ -60,6 +61,7 @@ exfatprogs
 f2fs-tools
 fastfetch
 ffmpegthumbnailer
+firefox
 flatpak
 fsarchiver
 git
@@ -87,10 +89,9 @@ inotify-tools
 intel-media-driver
 intel-media-sdk
 intel-ucode
-iptables-nft
+iptables
 iwd
 jfsutils
-kdenlive
 keyd
 kicad
 kitty
@@ -125,6 +126,7 @@ micro
 mkinitcpio
 modemmanager
 mokutil
+mpv
 mtools
 nano
 nano-syntax-highlighting
@@ -159,9 +161,12 @@ pkgfile
 playerctl
 plocate
 plymouth
+podman
+podman-compose
 polkit-kde-agent
 poppler-glib
 power-profiles-daemon
+powertop
 pulsemixer
 pv
 python
@@ -185,7 +190,9 @@ slurp
 smartmontools
 snapper
 sof-firmware
+spotify-launcher
 steam
+strace
 sudo
 swappy
 swaync
@@ -205,6 +212,7 @@ unzip
 upower
 usb_modeswitch
 usbutils
+uv
 uwsm
 vim
 vlc-plugins-all
@@ -226,3 +234,4 @@ xfsprogs
 xl2tpd
 xorg-xwayland
 yay
+zed

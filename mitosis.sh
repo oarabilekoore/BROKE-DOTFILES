@@ -15,7 +15,6 @@ echo "Exporting yay packages..."
 pacman -Qqem >"$DOT_DIR/pkglist-yay.txt" 2>/dev/null || true
 
 # 2. Backup configurations
-# Add paths here relative to your home directory
 CONFIGS=(
   ".config/hypr"
   ".config/waybar"
@@ -36,12 +35,9 @@ cd "$HOME" || exit 1
 
 for item in "${CONFIGS[@]}"; do
   if [[ -e "$item" ]]; then
-    # --parents maintains the directory structure (e.g., creates .config/hypr)
     cp -r --parents "$item" "$BACKUP_DIR/"
     echo "Backed up: $item"
   else
     echo "[WARNING] Skipped: $item (not found)" >&2
   fi
 done
-
-echo "Mitosis complete."

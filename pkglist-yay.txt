@@ -1,7 +1,9 @@
+ani-cli
 bottles
-discord_arch_electron
 hyprfloat
 hyprshade
+ltspice
 vicinae-bin
 wallust
+winboat-bin
 wps-office-cn

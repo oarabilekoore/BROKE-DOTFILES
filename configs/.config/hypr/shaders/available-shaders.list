@@ -1,0 +1,16 @@
+name:grayscale description:Apply grayscale effect system wide file:grayscale.frag
+name:night-owl description:Warm sepia filter to reduce eye strain at night file:night-owl.frag
+name:color-invert description:Invert all colors (Instant Dark Mode) file:invert.frag
+name:retro-crt description:Subtle horizontal scanlines for a retro monitor look file:crt.frag
+name:matrix-term description:High-contrast monochrome green hacker aesthetic file:matrix.frag
+name:vignette description:Cinematic darkened edges to focus the center screen file:vignette.frag
+name:chromatic-split description:Cyberpunk RGB channel separation file:chromatic-aberration.frag
+name:pixel-art description:Retro 8-bit pixelated display file:pixelate.frag
+name:comic-poster description:Reduces color bands for a posterized look file:posterize.frag
+name:neon-edges description:Finds and highlights edges (blueprint/neon vibe) file:edge-detect.frag
+name:cyberpunk-tint description:Aggressive synthwave magenta and cyan grading file:cyberpunk.frag
+name:golden-hour description:Warm, vibrant sunset cinematic tint file:golden-hour.frag
+name:punchy-contrast description:Boosts saturation and contrast heavily file:high-contrast.frag
+name:underwater-wave description:Wavy spatial distortion on the screen file:underwater.frag
+name:film-grain description:Adds static cinematic noise/grain file:static-grain.frag
+name:fisheye-lens description:Barrel distortion mimicking a fisheye camera file:lens-distortion.frag

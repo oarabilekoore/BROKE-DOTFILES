@@ -66,7 +66,7 @@ function mkcd --description "Make directory and enter it"
     mkdir -p $argv[1]; and cd $argv[1]
 end
 
-function cfg --description "Quick config edit"
+function c --description "Quick config edit"
     set target "$HOME/.config/$argv[1]"
     if test -z "$argv[1]"
         echo "Usage: cfg <configDirectory>"

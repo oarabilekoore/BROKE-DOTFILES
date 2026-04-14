@@ -7,7 +7,7 @@
   "on-sigusr1": "hide",
   "on-sigusr2": "show",
   "modules-left": ["hyprland/workspaces", "custom/media"],
-  "modules-center": ["clock"],
+  "modules-center": ["clock","hyprland/window"],
   "modules-right": [
     "tray",
     "bluetooth",
@@ -27,7 +27,9 @@
       "1": [], "2": [], "3": [], "4": [], "5": []
     }
   },
-
+  "hyprland/window": {
+    "format": ""
+  },
   "custom/media": {
     "format": "{}",
     "return-type": "json",

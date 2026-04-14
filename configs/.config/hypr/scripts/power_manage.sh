@@ -6,8 +6,8 @@ LOW_FREQ=1900000
 MIN_FREQ=800000 # 800 MHz Extreme Mode
 
 # Thresholds
-LOW_THRESHOLD=70
-CRITICAL_THRESHOLD=50 # Now triggers at 30%
+LOW_THRESHOLD=60
+CRITICAL_THRESHOLD=30 # Now triggers at 30%
 
 STATE_FILE="/tmp/power_mode_state"
 OVERRIDE_FILE="/tmp/power_mode_override"
