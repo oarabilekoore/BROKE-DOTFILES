@@ -3,6 +3,5 @@ aylurs-gtk-shell-git
 google-chrome
 hyprfloat
 hyprshade
-orchis-theme-git
 vicinae-bin
 wallust

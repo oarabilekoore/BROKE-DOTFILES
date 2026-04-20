@@ -14,6 +14,14 @@ pacman -Qqen >"$DOT_DIR/pkglist-pacman.txt"
 echo "Exporting yay packages..."
 pacman -Qqem >"$DOT_DIR/pkglist-yay.txt" 2>/dev/null || true
 
+echo "Exporting flatpak packages..."
+if command -v flatpak >/dev/null 2>&1; then
+  flatpak list --app --columns=application >"$DOT_DIR/pkglist-flatpak.txt"
+else
+  echo "[WARNING] flatpak not installed, skipping export." >&2
+  touch "$DOT_DIR/pkglist-flatpak.txt"
+fi
+
 # 2. Backup configurations
 CONFIGS=(
   ".config/hypr"
