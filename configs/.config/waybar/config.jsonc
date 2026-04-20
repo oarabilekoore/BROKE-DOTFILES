@@ -6,8 +6,10 @@
   "height": 26,
   "on-sigusr1": "hide",
   "on-sigusr2": "show",
-  "modules-left": ["hyprland/workspaces", "custom/media"],
-  "modules-center": ["clock","hyprland/window"],
+  "modules-left": ["hyprland/workspaces", "mpris"],
+  "modules-center": ["clock"],
+  "on-sigusr1": "hide",
+  "on-sigusr2": "show",
   "modules-right": [
     "tray",
     "bluetooth",
@@ -27,20 +29,20 @@
       "1": [], "2": [], "3": [], "4": [], "5": []
     }
   },
-  "hyprland/window": {
-    "format": ""
-  },
-  "custom/media": {
-    "format": "{}",
-    "return-type": "json",
-    "max-length": 55,
-    "exec": "~/.config/hypr/scripts/now_playing.sh",
-    "on-click": "playerctl play-pause",
-    "on-scroll-up": "playerctl next",
-    "on-scroll-down": "playerctl previous",
-    "interval": 1
+
+  "mpris": {
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "dynamic-len": 27,
+    "player-icons": {
+        "default": "󰝚",
+        "spotify": ""
+    },
+    "status-icons": {
+        "paused": "󰏤"
+    }
 },
-  
+
   "clock": {
     "format": "{:L%A %H:%M}",
     "format-alt": "{:L%d %B W%V %Y}",

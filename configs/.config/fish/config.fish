@@ -6,7 +6,7 @@ end
 set -gx BUN_INSTALL "$HOME/.bun"
 set -gx NVM_DIR "$HOME/.nvm"
 set -gx QT_QPA_PLATFORMTHEME qt6ct
-set -gx LIBVA_DRIVER_NAME i965
+set -gx LIBVA_DRIVER_NAME
 
 # Fish handles PATH duplicates automatically
 fish_add_path "$HOME/.local/bin"
@@ -21,10 +21,10 @@ if status is-interactive
 
     # --- Aliases (Most copy-paste fine) ---
     # System
-    alias update='sudo pacman -Syu'
+    alias u='sudo pacman -Syu'
     # alias install='sudo pacman -S'  <-- REMOVED (Replaced by function below)
     # alias remove='sudo pacman -Rns' <-- REMOVED (Replaced by function below)
-    alias rmorphan='sudo pacman -Rns (pacman -Qdtq)'
+    alias rmo='sudo pacman -Rns (pacman -Qdtq)'
 
     # Power
     alias sleep='sudo systemctl suspend'
@@ -33,8 +33,8 @@ if status is-interactive
     alias cpuperf='sudo cpupower frequency-set -g performance'
 
     # Pacman Query
-    alias search='pacman -Ss'
-    alias info='pacman -Si'
+    alias s='pacman -Ss'
+    alias i='pacman -Si'
     alias files='pacman -Ql'
     alias owner='pacman -Qo'
 
@@ -62,14 +62,14 @@ end
 
 # --- 3. Translated Functions ---
 
-function mkcd --description "Make directory and enter it"
+function m --description "Make directory and enter it"
     mkdir -p $argv[1]; and cd $argv[1]
 end
 
 function c --description "Quick config edit"
     set target "$HOME/.config/$argv[1]"
     if test -z "$argv[1]"
-        echo "Usage: cfg <configDirectory>"
+        echo "Usage: c <configDirectory>"
         return 1
     end
     if test -d "$target"
@@ -81,7 +81,37 @@ function c --description "Quick config edit"
     end
 end
 
-function remove --description "Smart remove: Searches Pacman and Flatpak"
+function d --description "Quickly step into a development folder"
+    set target "$HOME/Development/$argv[1]"
+    if test -z "$argv[1]"
+        echo "Usage: d <devDirectory>"
+        return 1
+    end
+    if test -d "$target"
+        cd "$target"
+        nvim .
+    else
+        echo "Error: Dev Folder '$argv[1]' not found in $HOME/Development/"
+        return 1
+    end
+end
+
+function dr --description "Quickly step into a development folder and run startup script"
+    set target "$HOME/Development/$argv[1]"
+    if test -z "$argv[1]"
+        echo "Usage: d <devDirectory>"
+        return 1
+    end
+    if test -d "$target"
+        cd "$target"
+        ./startup.sh
+    else
+        echo "Error: Dev Folder '$argv[1]' not found in $HOME/Development/"
+        return 1
+    end
+end
+
+function r --description "Smart remove: Searches Pacman and Flatpak"
     if test (count $argv) -eq 0
         echo "Usage: remove <app_name>"
         return 1
@@ -139,7 +169,7 @@ function remove --description "Smart remove: Searches Pacman and Flatpak"
     end
 end
 
-function install --description "Smart install: Tries Yay/Pacman, then Flatpak search"
+function i --description "Smart install: Tries Yay/Pacman, then Flatpak search"
     if test (count $argv) -eq 0
         echo "Usage: install <app_name>"
         return 1

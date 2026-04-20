@@ -8,7 +8,7 @@ DEVICES=$(adb devices -l | grep -v "List of devices" | sed '/^$/d' | awk '{
 }' | sed 's/model://g')
 
 MENU_LIST="Connect to New IP\n$DEVICES"
-SELECTED=$(echo -e "$MENU_LIST" | vicinae dmenu -p "Select Android Device" -i -l 10)
+SELECTED=$(echo -e "$MENU_LIST" | vicinae dmenu -p "Select Android Device")
 
 if [ -z "$SELECTED" ]; then exit 0; fi
 

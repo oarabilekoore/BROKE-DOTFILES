@@ -3,14 +3,14 @@
    ================================ */
 
 /* Wallust color variables */
-@define-color bg        #14161A;
-@define-color fg        #F7F5EA;
-@define-color accent    #ED424B;
-@define-color accent2   #C48C43;
-@define-color critical  #1C2510;
-@define-color warning   #6D7568;
-@define-color success   #581409;
-@define-color muted     #A5A398;
+@define-color bg        #292724;
+@define-color fg        #F0F0EE;
+@define-color accent    #988878;
+@define-color accent2   #C8B8A8;
+@define-color critical  #30251A;
+@define-color warning   #816E5B;
+@define-color success   #635140;
+@define-color muted     #9D9D9B;
 
 /* Fonts */
 * {

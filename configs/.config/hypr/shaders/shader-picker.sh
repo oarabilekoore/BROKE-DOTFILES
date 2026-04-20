@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
 
 # --- Configuration ---
-# Updated directory to where your shaders and the list file actually live
 SHADER_DIR="$HOME/.config/hypr/shaders"
 LIST_FILE="$SHADER_DIR/available-shaders.list"
+STATE_FILE="$SHADER_DIR/current_shader"
+
+# --- 0. Auto-start (Init) Mode ---
+# This runs when called from autostart.conf (e.g., ./shader-picker.sh init)
+if [[ "$1" == "init" ]]; then
+  if [[ -f "$STATE_FILE" ]]; then
+    SAVED_SHADER=$(cat "$STATE_FILE")
+    if [[ -n "$SAVED_SHADER" && -f "$SAVED_SHADER" ]]; then
+      # Apply the saved shader and lower damage tracking
+      hyprctl keyword debug:damage_tracking 1
+      hyprctl keyword decoration:screen_shader "$SAVED_SHADER"
+    fi
+  fi
+  exit 0
+fi
 
 # Check if the list file exists
 if [[ ! -f "$LIST_FILE" ]]; then
@@ -34,6 +48,10 @@ if [[ "$CHOICE" == "Turn off shaders" ]]; then
   # Clear the shader in Hyprland
   hyprctl keyword decoration:screen_shader "[[EMPTY]]"
   hyprctl keyword debug:damage_tracking 2
+
+  # Remove the saved state so nothing loads on next boot
+  rm -f "$STATE_FILE"
+
   notify-send "Shaders Disabled" "System-wide screen shaders turned off."
   exit 0
 fi
@@ -57,6 +75,10 @@ if [[ -n "$SELECTED_FILE" ]]; then
     # Apply the shader in Hyprland
     hyprctl keyword debug:damage_tracking 1
     hyprctl keyword decoration:screen_shader "$SHADER_PATH"
+
+    # Save the choice for persistence across reboots
+    echo "$SHADER_PATH" >"$STATE_FILE"
+
     notify-send "Shader Applied" "Currently using: $SELECTED_NAME"
   else
     notify-send "Shader Error" "File not found: $SHADER_PATH"

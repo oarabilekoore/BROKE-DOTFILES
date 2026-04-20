@@ -14,7 +14,7 @@
    "consider_preedit": true,
    "pop_to_root_on_close": true,
    "favicon_service": "google",
-   "search_files_in_root": true,
+   "search_files_in_root": false,
    "theme": {
       "light": {
          "name": "zenwritten-dark"
@@ -38,21 +38,13 @@
          }
       },
       "@dagimg-dot/store.vicinae.wifi-commander": {
+         "enabled": true,
          "entrypoints": {
             "restart-wifi": {
                "alias": "rw"
             },
             "scan-wifi": {
                "alias": "nm"
-            }
-         }
-      },
-      "@rithvikvibhu/store.vicinae.arch-packages": {
-         "enabled": false,
-         "entrypoints": {
-            "search-arch-packages": {
-               "alias": "aur",
-               "enabled": true
             }
          }
       },
@@ -80,6 +72,9 @@
             }
          }
       },
+      "browser-extension": {
+         "enabled": false
+      },
       "clipboard": {
          "preferences": {
             "encryption": false,
@@ -94,6 +89,22 @@
                "alias": "em"
             }
          }
+      },
+      "files": {
+         "preferences": {
+            "autoIndexing": true,
+            "excludedPaths": "",
+            "paths": "/home/vaseline/Documents/",
+            "watcherPaths": ""
+         },
+         "entrypoints": {
+            "search": {
+               "alias": "fs"
+            }
+         }
+      },
+      "raycast-compat": {
+         "enabled": false
       }
    }
 }

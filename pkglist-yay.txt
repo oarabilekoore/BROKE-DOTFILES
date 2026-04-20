@@ -1,9 +1,8 @@
 ani-cli
-bottles
+aylurs-gtk-shell-git
+google-chrome
 hyprfloat
 hyprshade
-ltspice
+orchis-theme-git
 vicinae-bin
 wallust
-winboat-bin
-wps-office-cn

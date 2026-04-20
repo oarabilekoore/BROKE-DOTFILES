@@ -1,6 +1,4 @@
 #!/bin/bash
-#!/bin/bash
-#!/bin/bash
 
 # Name of your Rust binary
 BIN_NAME="waybar_auto_hide"
