@@ -19,19 +19,11 @@ fi
 # --- 2. GENERATE COLORS (Wallust) ---
 wallust run "$WALLPAPER_PATH" >/dev/null
 
-# --- 3. UPDATE GTK ---
-gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-
 # --- 4. RELOAD APPS ---
 pkill -x -SIGUSR2 waybar || (pkill -x waybar && waybar &)
 
 if command -v swaync-client &>/dev/null; then
   swaync-client -rs >/dev/null 2>&1 || true
-fi
-
-if pgrep -x "dunst" >/dev/null; then
-  pkill -x dunst && dunst &
 fi
 
 # Restart Auto-Hide Script

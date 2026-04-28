@@ -57,7 +57,7 @@ The environment is built around **Hyprland**, utilizing the `SUPER` key as the m
 
 ### Applications & Utilities
 * `SUPER` + `RETURN` or `X` : Open Terminal (Kitty)
-* `SUPER` + `B` : Web Browser (Firefox)
+* `SUPER` + `B` : Web Browser (Chrome)
 * `SUPER` + `E` : File Manager (Nautilus)
 * `SUPER` + `D` : App Launcher (Vicinae)
 * `SUPER` + `W` : Wallpaper Picker (Waypaper)

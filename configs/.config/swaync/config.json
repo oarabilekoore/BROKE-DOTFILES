@@ -63,12 +63,7 @@
     }
   },
 
-  "widgets": [
-    "title",
-    "volume",
-    "dnd",
-    "notifications"
-  ],
+  "widgets": ["title", "volume", "dnd", "notifications"],
 
   "widget-config": {
     "title": {
@@ -100,4 +95,3 @@
     }
   }
 }
-

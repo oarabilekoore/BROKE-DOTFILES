@@ -13,15 +13,24 @@
    "close_on_focus_loss": true,
    "consider_preedit": true,
    "pop_to_root_on_close": true,
+   "activate_on_single_click": true,
    "favicon_service": "google",
    "search_files_in_root": false,
+   "font": {
+      "rendering": "native",
+      "normal": {}
+   },
    "theme": {
       "light": {
          "name": "zenwritten-dark"
+      },
+      "dark": {
+         "name": "vicinae-dark",
+         "icon_theme": "MacTahoe-dark"
       }
    },
    "launcher_window": {
-      "opacity": 0.9
+      "opacity": 0.88
    },
    "keybinds": {
       "toggle-action-panel": "shift+A"
