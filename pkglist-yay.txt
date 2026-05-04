@@ -1,7 +1,9 @@
 ani-cli
 aylurs-gtk-shell-git
-google-chrome
+brave-origin-beta-bin
+gnome-shell-pomodoro
 hyprfloat
 hyprshade
+preload
 vicinae-bin
 wallust

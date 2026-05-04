@@ -86,6 +86,7 @@ hyprlock
 hyprutils
 inetutils
 inotify-tools
+intel-gpu-tools
 intel-media-driver
 intel-media-sdk
 intel-ucode
@@ -161,6 +162,7 @@ pkgfile
 playerctl
 plocate
 poppler-glib
+postgresql
 power-profiles-daemon
 powertop
 pulsemixer

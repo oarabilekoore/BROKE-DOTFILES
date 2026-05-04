@@ -29,7 +29,7 @@
       "1": [], "2": [], "3": [], "4": [], "5": []
     }
   },
-
+  
   "mpris": {
     "format": "{player_icon} {dynamic}",
     "format-paused": "{status_icon} <i>{dynamic}</i>",

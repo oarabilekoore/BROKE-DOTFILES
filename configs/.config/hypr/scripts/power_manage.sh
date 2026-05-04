@@ -15,18 +15,26 @@ OVERRIDE_FILE="/tmp/power_mode_override"
 get_battery() { cat /sys/class/power_supply/BAT0/capacity; }
 get_status() { cat /sys/class/power_supply/BAT0/status; }
 
-apply_freq() {
+apply_profile() {
   local freq=$1
   local mode_name=$2
+  local scheduler=$3
   local prev_mode=$(cat "$STATE_FILE" 2>/dev/null)
 
   # Only apply and notify if the state actually changes
   if [[ "$mode_name" != "$prev_mode" ]]; then
+    # 1. Apply CPU Frequency
     for file in /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq; do
       echo "$freq" >"$file" 2>/dev/null
     done
+
+    # 2. Apply SCX Scheduler
+    # scx_loader gracefully stops the current scheduler and starts the new one
+    scx_loader -s "$scheduler" >/dev/null 2>&1
+
+    # 3. Update State & Notify
     echo "$mode_name" >"$STATE_FILE"
-    notify-send -u normal -i "speedometer" "Power Management" "CPU Mode: ${mode_name}"
+    notify-send -u normal -i "speedometer" "Power Management" "Mode: ${mode_name}\nScheduler: scx_${scheduler}"
   fi
 }
 
@@ -37,7 +45,7 @@ check_battery() {
   # 1. Charger Logic: Resets everything to Max Performance
   if [[ "$status" == "Charging" || "$status" == "Full" ]]; then
     rm -f "$OVERRIDE_FILE"
-    apply_freq "$MAX_FREQ" "PERFORMANCE (AC)"
+    apply_profile "$MAX_FREQ" "PERFORMANCE (AC)" "rustland"
     return
   fi
 
@@ -48,11 +56,11 @@ check_battery() {
 
   # 3. 3-Tier Auto Logic
   if [[ "$capacity" -le $CRITICAL_THRESHOLD ]]; then
-    apply_freq "$MIN_FREQ" "EXTREME POWERSAVE (Critical)"
+    apply_profile "$MIN_FREQ" "EXTREME POWERSAVE (Critical)" "tickless"
   elif [[ "$capacity" -le $LOW_THRESHOLD ]]; then
-    apply_freq "$LOW_FREQ" "POWERSAVE (Low)"
+    apply_profile "$LOW_FREQ" "POWERSAVE (Low)" "lavd"
   else
-    apply_freq "$MAX_FREQ" "PERFORMANCE (High)"
+    apply_profile "$MAX_FREQ" "PERFORMANCE (High)" "rustland"
   fi
 }
 
@@ -62,10 +70,10 @@ toggle_mode() {
   # Toggle manually swaps between Performance and the standard Low mode
   if [[ "$current" == "PERFORMANCE (High)" || "$current" == "MANUAL PERFORMANCE" || "$current" == "PERFORMANCE (AC)" ]]; then
     touch "$OVERRIDE_FILE"
-    apply_freq "$LOW_FREQ" "MANUAL POWERSAVE"
+    apply_profile "$LOW_FREQ" "MANUAL POWERSAVE" "lavd"
   else
     touch "$OVERRIDE_FILE"
-    apply_freq "$MAX_FREQ" "MANUAL PERFORMANCE"
+    apply_profile "$MAX_FREQ" "MANUAL PERFORMANCE" "rustland"
   fi
 }
 
